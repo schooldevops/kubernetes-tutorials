@@ -5,6 +5,8 @@
 
 ![kubernetes_storage](imgs/storage.jpeg)
 
+image from : https://amazic.com/kubernetes-storage-101-all-you-need-to-know-to-get-started/
+
 ## Persistent Volume (PV)
 
 - 클러스터 레벨의 리소스이다. 
@@ -90,6 +92,8 @@
 ## 정적/동적 프로비저닝 
 
 ![dyanmic provisioning](imgs/rancher-storage.svg)
+
+image from : https://rancher.com/docs/rancher/v2.5/en/cluster-admin/volumes-and-storage/how-storage-works/
 
 - 정적 프로비저닝
   - 상단 화면과 같이 PVC 요청을 수행하면 매치되는 PV를 검색한다. 
