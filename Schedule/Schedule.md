@@ -21,14 +21,16 @@
   
 ![Scheduler](imgs/scheduler.png)
 
-- 1. 사용자가 API Server에 Pod 생성을 요청한다. 
-- 2. 요청된 Pod 생성을 etcd에 저장한다. 
-- 3. Scheduler는 API Server를 확인하면서 새로 생성된 pod가 존재하는지 검사한다. 
-- 4. 스케줄링이 완료되면 API Server에 해당 pod에 대해서 바인딩 요청을 한다. 
-- 5. Kubelet은 API 서버에 주기적 요청을 수행하면서 Pod를 자신의 노드에 배치한다. 
-- 6. 배차가 완료되면 kubelet은 container runtime을 통해서 컨테이너를 실행한다. 
-- 7. kubelet은 실행된 pod의 상태를 주기적으로 API Server에 업데이트한다. 
-- 8. API Server는 etcd에 쓰기를 수행한다.
+image from: https://k21academy.com/docker-kubernetes/scheduling-in-kubernetes/
+
+1. 사용자가 API Server에 Pod 생성을 요청한다. 
+2. 요청된 Pod 생성을 etcd에 저장한다. 
+3. Scheduler는 API Server를 확인하면서 새로 생성된 pod가 존재하는지 검사한다. 
+4. 스케줄링이 완료되면 API Server에 해당 pod에 대해서 바인딩 요청을 한다. 
+5. Kubelet은 API 서버에 주기적 요청을 수행하면서 Pod를 자신의 노드에 배치한다. 
+6. 배차가 완료되면 kubelet은 container runtime을 통해서 컨테이너를 실행한다. 
+7. kubelet은 실행된 pod의 상태를 주기적으로 API Server에 업데이트한다. 
+8. API Server는 etcd에 쓰기를 수행한다.
 
 ## Pod 배치 단계
 
