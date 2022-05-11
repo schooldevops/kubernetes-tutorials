@@ -213,6 +213,73 @@ spec:
         claimName: my-pvc
 ```
 
+## emptyDir, hostPath, PV
+
+- 개발 및 실제 사용시에 주요 볼륨을 알아보자. 
+  
+### emptyDir
+
+- 처음 pod가 기동되고, 볼륨이 생성될때 비어있는 볼륨을 생성하므로 emptyDir 이라고 한다. 
+- pod내부에 생성되므로, pod가 종료되면 볼륨의 내용도 함께 제거 된다. 
+- 일시적인 목적으로 사용하는 경우 이 볼륨을 이용할 수 있다. 
+- pod내 여러 컨테이너가 있다면, 이 볼륨은 공유 될 수 있다. 
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-empty-dir
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: empty-dir
+      mountPath: /mount1
+  - name: was
+    image: my-was
+    volumeMounts:
+    - name: empty-dir
+      mountPath: /mount2
+  volumes:
+  - name : empty-dir
+    emptyDir: {}
+```
+### hostPath
+
+- 노드 머신의 특정 경로에 볼륨을 지정한다. 
+- host는 노드, Path는 특정 경로라고 할 수 있다. 
+- emptyDir과는 다르게 Pod가 종료되어도 볼륨은 유지된다. 
+- pod가 다른 노드에서 실행된다면 이전 볼륨을 이용할 수 없게 된다. 
+- hostPath는 사전에 만들어져 있어야 pod가 실행될때 오류가 나지 않는다. 
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-hostpath
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: node01
+  containers:
+  - name: my-was
+    image: my-was
+    volumeMounts:
+    - name: host-path
+      mountPath: /mount1
+  volumes:
+  - name : host-path
+    hostPath:
+      path: /data/was
+      type: DirectoryOrCreate
+```
+### PV
+
+- Persistent Volume 는 클러스터 관리자, 혹은 CSP 등에서 생성해 둔 볼륨(EBS, NFS) 이며, 동적으로 생성될 수 있다. 
+- PV를 생성하면 POD는 PVC(Persistent Volume Claim)을 통해서 볼륨을 요청하고, 매치되는 적절한 PV를 발견하면 바인딩되어 사용할 수 있게 된다. 
+- 정적 프로비져닝은 관리자에 의해서 직접 생성된 것을 말한다. 
+- 동적 프로비저닝은 PVC가 요청할때 매치되는 PV를 찾을 수 없는경우 자동으로 생성되도록 설정된 것을 말한다. 
+- PV는 Pod가 종료되어도 유지된다. 
 ## WrapUP
 
 - 지금까지 Kubernetes에서 볼륨이 왜 필요하고, Persistent Volume, Persistent Volume Claim, Binding 에 대해서 알아 보았다. 
