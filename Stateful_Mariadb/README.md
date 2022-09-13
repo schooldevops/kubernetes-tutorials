@@ -202,6 +202,3 @@ persistentvolumeclaim/mysql-data-mysql-0   Bound    pvc-193cc960-22c7-4931-94f1-
 - StatefulSet을 이용하여 로컬 환경에 볼륨을 생성하여 pod를 실행해 보았다. 
 - StatefulSet의 특징은 PersistentVolumeClaim을 volumeClaimTemplates로 직접 지정한다는 점에서 일반 Deployment와 다르다는 것도 알았다. 
 - 서비스는 32306으로 노드 포트를 이용하여 mariaDB에 접근할 수 있다. 
-
-
-

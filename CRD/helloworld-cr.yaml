@@ -1,0 +1,9 @@
+apiVersion: schooldevops.com/v1alpha1
+kind: HelloWorld
+metadata:
+  name: helloworld-test
+spec:
+  morningHeloWorld: GoodMorning!!!
+  noonHelloWorld: HaveALunch~~
+  eveningHelloWorld: ComeBackHome!!!
+  replicas: 1

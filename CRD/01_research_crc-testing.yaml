@@ -1,0 +1,8 @@
+apiVersion: gvramana.io/v1alpha1
+kind: Greeting
+metadata:
+  name: ramana-greeting
+spec:
+  emailToGreet: ramana.gali@gmail.com
+  messageToGreet: Hello
+  replicas: 1
